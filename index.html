@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 500px;
+            height: 500px;
+            display: block;
+        }
+        .mt200{
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <img id="img1" data-src="https://image.shutterstock.com/z/stock-photo-large-beautiful-drops-of-transparent-rain-water-on-a-green-leaf-macro-drops-of-dew-in-the-morning-668593321.jpg"/>
+    <img id="img2" class="mt200" data-src="https://image.shutterstock.com/z/stock-photo-waves-of-water-of-the-river-and-the-sea-meet-each-other-during-high-tide-and-low-tide-whirlpools-1529923664.jpg"/>
+    <img id="img3" class="mt200" data-src="https://image.shutterstock.com/z/stock-photo-jasna-lake-with-beautiful-reflections-of-the-mountains-triglav-national-park-slovenia-1707906793.jpg"/>
+    <img id="img4" class="mt200" data-src="https://image.shutterstock.com/z/stock-photo-large-beautiful-drops-of-transparent-rain-water-on-a-green-leaf-macro-drops-of-dew-in-the-morning-668593321.jpg"/>
+    <img id="img5" class="mt200" data-src="https://image.shutterstock.com/z/stock-photo-waves-of-water-of-the-river-and-the-sea-meet-each-other-during-high-tide-and-low-tide-whirlpools-1529923664.jpg"/>
+    <img id="img6" class="mt200" data-src="https://image.shutterstock.com/z/stock-photo-jasna-lake-with-beautiful-reflections-of-the-mountains-triglav-national-park-slovenia-1707906793.jpg"/>
+    <script>
+        let options = {
+            root:null,
+            rootMargin:'0px',
+            threshold:0.25
+        }
+        let callback = (entries,observer)=>{
+            // console.log(entries);
+            // console.log(observer)
+            entries.map(entry=>{
+                if(entry.isIntersecting){
+                    let imgUrl = entry.target.getAttribute("data-src");
+                    // console.log(imgUrl)
+                    entry.target.src = imgUrl;
+                    // observer.unobserver(entry.target)
+                    observer.unobserve(entry.target);
+                }
+            })
+        }
+        let observer =  new IntersectionObserver(callback,options);
+        observer.observe(document.querySelector("#img1"))
+        observer.observe(document.querySelector("#img2"))
+        observer.observe(document.querySelector("#img3"))
+        observer.observe(document.querySelector("#img4"))
+        observer.observe(document.querySelector("#img5"))
+        observer.observe(document.querySelector("#img6"))
+
+    </script>
+</body>
+</html>
